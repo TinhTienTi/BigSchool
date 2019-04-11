@@ -23,7 +23,7 @@
                     {
                         <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Theo dõi</button>
                     }
-                    <br />
+                    
                     <span class="category">
                         @course.Category.Name
                     </span>
@@ -51,7 +51,7 @@
                                 .text("Đã tham gia")
                         })
                         .fail(function () {
-                            alert("Có gì đó sai!");
+                            alert("Có gì đó sai sai thì phải!");
                         });
                 } else {
                     $.ajax({
@@ -78,7 +78,7 @@
                             button.text("Đã theo dõi");
                         })
                         .fail(function () {
-                            alert("Có gì đó sai!");
+                            alert("Có gì đó sai sai thì phải!");
                         });
                 } else {
                     $.ajax({
@@ -92,7 +92,7 @@
                                 .text("Theo dõi");
                         })
                         .fail(function () {
-                            alert("Có gì đó sai!")
+                            alert("Có gì đó sai sai thì phải!")
                         });
                 }
             });

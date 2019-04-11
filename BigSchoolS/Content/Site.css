@@ -1,28 +1,21 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿.navbar-inverse {
+    background-image: linear-gradient(45deg, rgb(0, 219, 222), rgb(252, 0, 255));
+    border-color:#ffffff;
 }
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
+    .navbar-inverse .navbar-nav > li > a {
+        color: #ffffff;
+    }
+    .navbar-inverse .navbar-brand {
+        color: #ffffff;
+    }
+    .navbar-inverse .navbar-nav > .dropdown > a .caret {
+        border-top-color: #ffffff;
+        border-bottom-color: #ffffff;
+    }
+    .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+        color: #ffffff;
+        background-color: #000000;
+    }
 /*Course layout*/
 .course{
     list-style:none;
@@ -33,7 +26,7 @@ textarea {
 }
 .course > li .date{
     text-align:center;
-    background-color:red;
+    background-color:#ff6a00;
     color:white;
     width:60px;
     border-radius:8px;
