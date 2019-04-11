@@ -1,6 +1,6 @@
 ﻿@model BigSchoolS.ViewModels.CoursesViewModel
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Trang Chủ";
 }
 <div class="row" style="margin-top:15px">
     <ul class="course">
@@ -23,7 +23,6 @@
                     {
                         <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Theo dõi</button>
                     }
-                    
                     <span class="category">
                         @course.Category.Name
                     </span>
@@ -51,7 +50,7 @@
                                 .text("Đã tham gia")
                         })
                         .fail(function () {
-                            alert("Có gì đó sai sai thì phải!");
+                            alert("Có gì đó sai!");
                         });
                 } else {
                     $.ajax({
@@ -78,7 +77,7 @@
                             button.text("Đã theo dõi");
                         })
                         .fail(function () {
-                            alert("Có gì đó sai sai thì phải!");
+                            alert("Có gì đó sai!");
                         });
                 } else {
                     $.ajax({
@@ -92,7 +91,7 @@
                                 .text("Theo dõi");
                         })
                         .fail(function () {
-                            alert("Có gì đó sai sai thì phải!")
+                            alert("Có gì đó sai!")
                         });
                 }
             });
