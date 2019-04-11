@@ -1,0 +1,101 @@
+﻿@model BigSchoolS.ViewModels.CoursesViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="row" style="margin-top:15px">
+    <ul class="course">
+        @foreach (var course in Model.UpcommingCourse)
+        {
+            <li>
+                <div class="date">
+                    <div class="month">
+                        @course.DateTime.ToString("MM")
+                    </div>
+                    <div class="day">
+                        @course.DateTime.ToString("dd")
+                    </div>
+                </div>
+                <div class="details">
+                    <span class="lecturer">
+                        @course.Lecturer.Name
+                    </span>
+                    @if (Model.ShowAction)
+                    {
+                        <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Theo dõi</button>
+                    }
+                    <br />
+                    <span class="category">
+                        @course.Category.Name
+                    </span>
+                    @if (Model.ShowAction)
+                    {
+                        <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Tham gia?</button>
+                    }
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $(".js-toggle-attendance").click(function (e) {
+                var button = $(e.target);
+                if (button.hasClass("btn-default")) {
+                    $.post("/api/attendances", { courseId: button.attr("data-course-id") })
+                        .done(function () {
+                            button
+                                .removeClass("btn-default")
+                                .addClass("btn-info")
+                                .text("Đã tham gia")
+                        })
+                        .fail(function () {
+                            alert("Có gì đó sai!");
+                        });
+                } else {
+                    $.ajax({
+                        url: "/api/attendances" + button.attr("data-course-id"),
+                        method: "DELETE"
+                    })
+                        .done(function () {
+                            button
+                                .removeClass("btn-info")
+                                .addClass("btn-default")
+                                .text("Tham gia?");
+                        })
+                        .fail(function () {
+                            alert("Có gì đó sai!")
+                        });
+                }
+            });
+
+            $(".js-toggle-follow").click(function (e) {
+                var button = $(e.target);
+                if (button.hasClass("btn-default")) {
+                    $.post("/api/followings", { followeeId: button.attr("data-user-id") })
+                        .done(function () {
+                            button.text("Đã theo dõi");
+                        })
+                        .fail(function () {
+                            alert("Có gì đó sai!");
+                        });
+                } else {
+                    $.ajax({
+                        url: "/api/followings" + button.attr("data-course-id"),
+                        method: "DELETE"
+                    })
+                        .done(function () {
+                            button
+                                .removeClass("btn-info")
+                                .addClass("btn-default")
+                                .text("Theo dõi");
+                        })
+                        .fail(function () {
+                            alert("Có gì đó sai!")
+                        });
+                }
+            });
+        });
+    </script>
+}

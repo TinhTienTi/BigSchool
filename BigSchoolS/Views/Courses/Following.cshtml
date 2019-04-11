@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BigSchoolS.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Following";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Đang theo dõi</h2>
+
+<div class="row" style="margin-top: 10px;">
+    <ul class="course">
+        @foreach (var follow in Model)
+        {
+        <li>
+            <div>
+                <span>
+                    @follow.Name
+                </span>
+                <br />
+                <span>
+                    @follow.UserName
+                </span>
+            </div>
+            <div class="action">
+                <a href="#" class="js-cancel-course" data-course-id="@follow.Id">Cancel</a>
+            </div>
+        </li>
+        }
+    </ul>
+</div>
+

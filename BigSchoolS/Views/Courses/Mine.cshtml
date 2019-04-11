@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BigSchoolS.Models.Course>
+@{
+    ViewBag.Title = "Mine";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Của tôi</h2>
+<ul class="course">
+    @foreach (var course in Model)
+    {
+        <li>
+            <div class="date">
+                <div class="month">
+                    @course.DateTime.ToString("MM")
+                </div>
+                <div class="day">
+                    @course.DateTime.ToString("dd")
+                </div>
+            </div>
+            <div class="details">
+                <span class="lecturer">
+                    @course.Lecturer.Name
+                </span>
+                <span class="category">
+                    @course.Category.Name
+                </span>
+            </div>
+            <div class="action">
+                <a href="@Url.Action("Edit","Courses",new { id=course.Id})">Sửa</a>
+                <a>|</a>
+                <a href="#" class="js-cancel-course" data-course-id="@course.Id">Xóa</a>
+            </div>
+        </li>
+    }
+</ul>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $(".js-cancel-course").click(function (e) {
+                e.preventDefault();
+                var link = $(e.target);
+                bootbox.confirm("Bạn có chắc muốn xóa ?",
+                    function () {
+                        $.ajax({
+                            url: "/api/courses/" + link.attr("data-course-id"),
+                            method: "DELETE"
+                        })
+                            .done(function () {
+                                link.parents("li").fadeOut(function () {
+                                    $(this).remove();
+                                });
+                            })
+                            .fail(function () {
+                                alert("Có gì đó sai!");
+                            });
+                    });
+            });
+        });
+    </script>
+}

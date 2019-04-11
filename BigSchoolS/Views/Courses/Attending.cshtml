@@ -1,0 +1,38 @@
+﻿@model BigSchoolS.ViewModels.CoursesViewModel
+@{
+    ViewBag.Title = "Attending";
+}
+
+<h2>Đang tham dự</h2>
+<ul class="course">
+    @foreach (var course in Model.UpcommingCourse)
+    {
+        <li>
+            <div class="date">
+                <div class="month">
+                    @course.DateTime.ToString("MM")
+                </div>
+                <div class="day">
+                    @course.DateTime.ToString("dd")
+                </div>
+            </div>
+            <div class="details">
+                <span class="lecturer">
+                    @course.Lecturer.Name
+                    @if (Model.ShowAction)
+                    {
+                        <button class="btn btn-default btn-sm js-toggle-attendance" data-user-id="@course.LecturerId">Theo dõi</button>
+                    }
+                </span>
+                <span class="category">
+                    @course.Category.Name
+                </span>
+                @if (Model.ShowAction)
+                {
+                    <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Tham gia?</button>
+                }
+            </div>
+        </li>
+    }
+</ul>
+
